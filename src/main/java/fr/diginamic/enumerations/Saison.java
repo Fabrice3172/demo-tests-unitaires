@@ -34,21 +34,25 @@ public enum Saison {
 	 */
 	public static Saison valueOfLibelle(String libelle) {
 		Saison[] saisons = Saison.values();
+		Saison vide = Saison.PRINTEMPS;
+		vide.setLibelle("");
+		vide.setOrdre(0);
 		for (Saison saison : saisons) {
 			if (libelle.equals(saison.getLibelle())) {
 				return saison;
 			}
 			else {
-				return null;
+				return vide;
 			}
 		}
-		return null;
+		return vide;
 	}
 
 	@Override
 	public String toString() {
-		return ordre + ". " + libelle;
-	}
+		if ( (libelle != null) && (ordre > 0) && (ordre < 5)) return ordre + ". " + libelle;
+		else return "";
+    }
 
 	/**
 	 * Getter
@@ -66,5 +70,23 @@ public enum Saison {
 	 */
 	public int getOrdre() {
 		return ordre;
+	}
+
+	/**
+	 *  Setter
+	 * @param libelle
+	 */
+	public void setLibelle(String libelle) {
+		if (libelle.equals("Printemps") || libelle.equals("Eté") || libelle.equals("Hiver") || libelle.equals("Automne")) this.libelle = libelle;
+		else this.libelle = "";
+	}
+
+	/**
+	 *  Setter
+	 * @param ordre
+	 */
+	public void setOrdre(int ordre) {
+		if ((ordre > 0) && (ordre < 5)) this.ordre = ordre;
+		else this.ordre = 0;
 	}
 }

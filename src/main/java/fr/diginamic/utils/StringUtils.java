@@ -15,8 +15,15 @@ public final class StringUtils {
 	 * @return distance
 	 */
 	public static int levenshteinDistance(CharSequence lhs, CharSequence rhs) {
-		int len0 = lhs.length() + 1;
-		int len1 = rhs.length() + 1;
+		int len0 = 0;
+
+		int len1 = 0;
+		if (lhs != null) {
+			len0 = lhs.length() + 1;
+			if (rhs != null) len1 = rhs.length() + 1;
+			else return -1;
+		}
+		else return -1;
 
 		int[] cost = new int[len0];
 		int[] newcost = new int[len0];
@@ -42,6 +49,8 @@ public final class StringUtils {
 			cost = newcost;
 			newcost = swap;
 		}
-		return cost[len0 - 1];
+
+		if (len0 != 0) return cost[len0 - 1];
+		else return -1;
 	}
 }
